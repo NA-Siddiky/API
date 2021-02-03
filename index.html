@@ -18,6 +18,7 @@
         fetch('http://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(json => display(json))
+            .catch(error => console.log(error))
 
         function display(users) {
             console.log(users)
