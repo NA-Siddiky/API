@@ -8,7 +8,50 @@
 </head>
 
 <body>
-<h1>Welcome to API</h1>
+    <h1>Welcome to API</h1>
+    <h1>JSON = java script object notation</h1>
+    <ul id="user-credentials">
+        <p>1.adding myOne list1</p>
+        <p>2.adding myOne list2</p>
+    </ul>
+    <script>
+        fetch('http://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => display(json))
+
+        function display(users) {
+            console.log(users)
+            const userName = users.map(user => user.username)
+            console.log(userName);
+            const ul = document.getElementById("user-credentials")
+
+            for (let i = 0; i < userName.length; i++) {
+                const username = userName[i];
+                const li = document.createElement("li")
+                li.innerText = username;
+                ul.appendChild(li);
+            }
+
+        }
+
+
+        // const user = {
+        //     id: 34,
+        //     name: "kuddus",
+        //     // lover: "Kopila",
+        //     lover: {
+        //         name: "kopila",
+        //         hight: 6.3
+        //     },
+        //     age: [25, 56, 32],
+        //     friends: ["kamal", "jamal", "salam"]
+        // }
+        // const userJASON = JSON.stringify(user);
+        // // {"id":34,"name":"kuddus"}//
+        // console.log(userJASON);
+        // const userFromJSON = JSON.parse(userJASON);
+        // console.log(userFromJSON);
+    </script>
 </body>
 
 </html>
