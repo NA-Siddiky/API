@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Welcome to API</h1>
+    <h1>JSON = java script object notation</h1>
+    <ul id="user-credentials">
+        <p>1.adding myOne list1</p>
+        <p>2.adding myOne list2</p>
+        <input id="title" type="text" placeholder=" title">
+        <br>
+        <input id="bodyContent" type="text" placeholder=" Post Body">
+        <br>
+        <button id="submit">Submit</button>
+    </ul>
+    <script>
+        // const postInfo = {
+        //     id: 101,
+        //     title: 'foo',
+        //     body: 'bar',
+        //     userId: 1
+        // }
+        document.getElementById("submit").addEventListener("click", function () {
+            // console.log("submit button has been clicked")
+            const titelText = document.getElementById("title").value;
+            const bodyContentText = document.getElementById("bodyContent").value;
+            // console.log(titelText, bodyContentText);
+            const post = { title: titelText, body: bodyContentText };
+            nowPostToServer(post);
+        })
+        function nowPostToServer(postInfo) {
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                body: JSON.stringify(postInfo),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => console.log(data))
+                .catch(error => console.log("Please try again"))
+
+        }
+        function display(users) {
+            console.log(users)
+            const userName = users.map(user => user.username)
+            console.log(userName);
+            const ul = document.getElementById("user-credentials")
+
+            for (let i = 0; i < userName.length; i++) {
+                const username = userName[i];
+                const li = document.createElement("li")
+                li.innerText = username;
+                ul.appendChild(li);
+            }
+
+        }
+
+
+        // const user = {
+        //     id: 34,
+        //     name: "kuddus",
+        //     // lover: "Kopila",
+        //     lover: {
+        //         name: "kopila",
+        //         hight: 6.3
+        //     },
+        //     age: [25, 56, 32],
+        //     friends: ["kamal", "jamal", "salam"]
+        // }
+        // const userJASON = JSON.stringify(user);
+        // // {"id":34,"name":"kuddus"}//
+        // console.log(userJASON);
+        // const userFromJSON = JSON.parse(userJASON);
+        // console.log(userFromJSON);
+    </script>
+</body>
+
+</html>
